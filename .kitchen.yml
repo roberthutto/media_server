@@ -1,0 +1,23 @@
+---
+driver:
+  name: vagrant
+  network:
+    - ["private_network", { ip: "192.168.33.101" }]
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-16.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[media_server::default]
+    verifier:
+      inspec_tests:
+        - test/recipes
+    attributes:
